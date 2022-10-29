@@ -12,11 +12,7 @@ const input = document.querySelector('[type="text"]');
 const moreBtn = document.querySelector('.load-more');
 const gallery = document.querySelector('.gallery');
 
-let galleryLightbox = new SimpleLightbox(".gallery a", {
-    captions: true,
-    captionsData: "alt",
-    captionDelay: 250
-});
+let galleryLightbox = new SimpleLightbox(".gallery a");
 
 let page = 1;
 
