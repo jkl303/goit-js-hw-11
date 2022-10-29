@@ -26,14 +26,8 @@ const params = new URLSearchParams({
 
 moreBtn.style.visibility='hidden';
 
-gallery.addEventListener('click', e => e.preventDefault());
-
-moreBtn.addEventListener('click', () => {
-    page += 1;
-    searchImgs();
-});
-
 form.addEventListener('submit', onSearch);
+
 function onSearch(e) {
     e.preventDefault();
     page = 1;
@@ -49,15 +43,30 @@ function onSearch(e) {
         }
     }).catch((error) => console.log(error));
 }
-    
-function searchImgs() {
+
+moreBtn.addEventListener('click', seeMoreImgs);
+
+function seeMoreImgs() {page += 1;
     fetchImgs().then(imgs => {
-        console.log(imgs);
-        gallery.insertAdjacentHTML('beforeend', imgCard(imgs.data.hits));
-        galleryLightbox.refresh();
+            console.log(imgs);
+            gallery.insertAdjacentHTML('beforeend', imgCard(imgs.data.hits));
+            galleryLightbox.refresh();
+        const totalHits = imgs.data.totalHits / 40;
+        if (page >= totalHits) {
+            moreBtn.style.visibility = 'hidden';
+            Notify.info("We're sorry, but you've reached the end of search results.")
+        }
     }).catch((error) => console.log(error));
 }
+
+    function searchImgs() {
+        fetchImgs().then(imgs => {
+            console.log(imgs);
+            gallery.insertAdjacentHTML('beforeend', imgCard(imgs.data.hits));
+            galleryLightbox.refresh();
+        }).catch((error) => console.log(error));
+    }
     
-async function fetchImgs() {
-    return await axios.get(`${base_url}?${params}&q=${input.value}&page=${page}`);
-}
+    async function fetchImgs() {
+        return await axios.get(`${base_url}?${params}&q=${input.value}&page=${page}`);
+    }
