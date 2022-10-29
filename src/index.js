@@ -51,7 +51,7 @@ function onSearch(e) {
             Notify.success(`Hooray! We found ${resp.data.totalHits} images.`)
             searchImgs();
         }
-    })
+    }).catch((error) => console.log(error));
 }
     
 function searchImgs() {
