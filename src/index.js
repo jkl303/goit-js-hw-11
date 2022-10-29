@@ -1,9 +1,9 @@
-
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import "simplelightbox/dist/simple-lightbox.min.css";
 import "./css/styles.css";
-import imgCard from './imgCard.hbs'
+import imgCard from './imgCard.hbs';
+
 const axios = require('axios').default;
 const base_url = 'https://pixabay.com/api/';
 const KEY = '30906362-b5b03bb7697802982655c2c3d';
