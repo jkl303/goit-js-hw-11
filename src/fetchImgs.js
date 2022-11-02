@@ -12,5 +12,8 @@ const params = new URLSearchParams({
 });
 
 export async function fetchImgs(page) {
-        return await axios.get(`${base_url}?${params}&q=${input.value}&page=${page}`);
+    try { return await axios.get(`${base_url}?${params}&q=${input.value}&page=${page}`); }
+    catch (e) {
+        console.log(e);
     }
+}
